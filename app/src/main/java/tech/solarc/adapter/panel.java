@@ -1,22 +1,14 @@
 package tech.solarc.adapter;
 
-/**
- * Created by sagar on 29/4/17.
- */
-
 public class panel {
 
-    String name;
+    String mName;
 
     public panel(String name) {
-        this.name = name;
+        mName = name;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return mName;
     }
 }
