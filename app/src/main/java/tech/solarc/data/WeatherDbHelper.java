@@ -1,10 +1,10 @@
-package tech.solarc.Data;
+package tech.solarc.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static tech.solarc.Data.WeatherContract.*;
+import static tech.solarc.data.WeatherContract.*;
 
 /**
  * Created by jaikathuria on 30/04/17.

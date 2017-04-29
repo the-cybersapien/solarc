@@ -19,6 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".DefaultIntro"></activity>
+        
+        <provider
+            android:authorities="tech.solarc"
+            android:name=".data.WeatherProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
