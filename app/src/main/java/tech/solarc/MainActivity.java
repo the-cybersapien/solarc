@@ -9,11 +9,20 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
+import java.util.ArrayList;
+
+import tech.solarc.adapter.Appliance;
+import tech.solarc.adapter.AppliancesAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private RecyclerView mView;
+    private RecyclerView.LayoutManager mManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     0);
         }
-
 
         //  Declare a new thread to do a preference check
         Thread t = new Thread(new Runnable() {
@@ -60,6 +68,23 @@ public class MainActivity extends AppCompatActivity {
 
         // Start the thread
         t.start();
+        setContentView(R.layout.activity_main);
+
+        mView = (RecyclerView) findViewById(R.id.recycler_view);
+        mManager = new LinearLayoutManager(getApplicationContext());
+        mView.setLayoutManager(mManager);
+        mView.setItemAnimator(new DefaultItemAnimator());
+        ArrayList<Appliance> mList = new ArrayList<>();
+        mList.add(new Appliance("Fridge",1));
+        mList.add(new Appliance("CFL",3));
+        mList.add(new Appliance("Ceiling Fans",3));
+        mList.add(new Appliance("TV",1));
+        mList.add(new Appliance("Laptop",1));
+        mList.add(new Appliance("Washing Machine",1));
+        mList.add(new Appliance("Cell Phone",1));
+        AppliancesAdapter mAdapter = new AppliancesAdapter(this,mList);
+        mView.setAdapter(mAdapter);
+
 
     }
 
