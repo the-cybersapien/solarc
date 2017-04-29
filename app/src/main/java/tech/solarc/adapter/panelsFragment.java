@@ -12,7 +12,7 @@ import com.github.paolorotolo.appintro.ISlidePolicy;
 
 import java.util.ArrayList;
 
-import tech.solarc.MainActivity;
+import tech.solarc.DefaultIntro;
 import tech.solarc.R;
 
 
@@ -50,7 +50,7 @@ public class panelsFragment extends Fragment implements ISlidePolicy{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 flag = 1;
-                ((MainActivity)getActivity()).b();
+                ((DefaultIntro)getActivity()).b();
             }
         });
 
