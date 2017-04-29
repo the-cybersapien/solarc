@@ -1,8 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#E91E63"
     android:layout_height="match_parent"
-    tools:context="tech.solarc.adapter.panels">
+    tools:context="tech.solarc.adapter.panelsFragment">
+
     <ListView
         android:id="@+id/panel_list"
         android:layout_width="match_parent"
@@ -10,4 +12,5 @@
         android:layout_margin="32dp">
 
     </ListView>
+
 </LinearLayout>
