@@ -7,15 +7,17 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.recyclerview.animators.ScaleInLeftAnimator;
 import tech.solarc.adapter.Appliance;
 import tech.solarc.adapter.AppliancesAdapter;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mView;
     private RecyclerView.LayoutManager mManager;
+    private FloatingActionButton button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         mView = (RecyclerView) findViewById(R.id.recycler_view);
         mManager = new LinearLayoutManager(getApplicationContext());
         mView.setLayoutManager(mManager);
-        mView.setItemAnimator(new DefaultItemAnimator());
+        mView.setItemAnimator(new ScaleInLeftAnimator());
         ArrayList<Appliance> mList = new ArrayList<>();
         mList.add(new Appliance("Fridge",1));
         mList.add(new Appliance("CFL",3));
@@ -84,7 +87,14 @@ public class MainActivity extends AppCompatActivity {
         mList.add(new Appliance("Cell Phone",1));
         AppliancesAdapter mAdapter = new AppliancesAdapter(this,mList);
         mView.setAdapter(mAdapter);
-
+        button = (FloatingActionButton) findViewById(R.id.fab);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editor = new Intent(MainActivity.this, EditorActivity.class);
+                startActivity(editor);
+            }
+        });
 
     }
 

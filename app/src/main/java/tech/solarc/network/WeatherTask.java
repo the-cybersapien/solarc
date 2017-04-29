@@ -32,7 +32,8 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
 
     @Override
     protected Void doInBackground(String... params) {
-        
+
+        return null;
     }
 
     private URL buildURL(DataUtils.LatLang loc) throws MalformedURLException {
