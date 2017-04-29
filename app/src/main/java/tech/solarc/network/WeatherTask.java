@@ -1,6 +1,8 @@
 package tech.solarc.network;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 
@@ -8,11 +10,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import tech.solarc.R;
 import tech.solarc.Weather;
+import tech.solarc.data.WeatherContract;
 
 /**
  * Created by cybersapien on 30/4/17.
@@ -22,7 +27,8 @@ import tech.solarc.Weather;
 public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
 
     private static final String TAG = "WeatherTask";
-    private static final String OWM_API_KEY = "b1b15e88fa797225412429c1c50c122a1";
+    private static final String OWM_API_KEY = "0250712c5d426eaaebac6b6aac31043b";
+    public static final String MY_SHARED_PREFS = "tech.solarc.SHARED_PREF";
 
     private final Context context;
 
@@ -33,13 +39,40 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
     @Override
     protected Void doInBackground(String... params) {
 
+        SharedPreferences sharedPreferences =  context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE);
+        float latitude = sharedPreferences.getFloat(context.getString(R.string.prefs_name_lat), 0);
+        float longitude = sharedPreferences.getFloat(context.getString(R.string.prefs_name_lon), 0);
+        try {
+            URL queryURL = buildURL(new DataUtils.LatLang(latitude, longitude));
+            String jsonResponse = Utils.makeHttpRequest(queryURL);
+            ArrayList<Weather> data = getWeatherDataFromJson(jsonResponse);
+            if (data.size() >= 1)
+                addToDb(data);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
         return null;
+    }
+
+    private void addToDb(ArrayList<Weather> list){
+        if (list.size() < 1)
+            return;
+        for (Weather current : list) {
+            ContentValues values = new ContentValues();
+            values.put(WeatherContract.WeatherEntry.COLUMN_NAME_DATE, current.getDate());
+            values.put(WeatherContract.WeatherEntry.COLUMN_NAME_ICON, current.getIcon());
+            values.put(WeatherContract.WeatherEntry.COLUMN_NAME_CLOUD, current.getCloudCover());
+            context.getContentResolver().insert(WeatherContract.WeatherEntry.CONTENT_URI, values);
+        }
+        notifyAll();
+        //TODO: ADD Code to delete old data from Database here
     }
 
     private URL buildURL(DataUtils.LatLang loc) throws MalformedURLException {
         Uri.Builder builder = Uri.parse("http://api.openweathermap.org/data/2.5/forecast").buildUpon();
         builder.appendQueryParameter("lat", String.valueOf(loc.getLatitude()));
         builder.appendQueryParameter("lon", String.valueOf(loc.getLongitude()));
+        builder.appendQueryParameter("appid", OWM_API_KEY);
         return new URL(builder.build().toString());
     }
 

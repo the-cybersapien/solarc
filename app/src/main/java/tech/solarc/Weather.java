@@ -2,6 +2,7 @@ package tech.solarc;
 
 /**
  * Created by cybersapien on 30/4/17.
+ * POJO for Weather 
  */
 
 public class Weather {
