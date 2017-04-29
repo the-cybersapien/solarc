@@ -27,7 +27,7 @@ public class panelAdapter extends ArrayAdapter<panel> {
         View listItemView = convertView;
         if(listItemView == null)
         {
-            listItemView = (View) LayoutInflater.from(getContext()).inflate(R.layout.item_panel,parent,false);
+            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.item_panel,parent,false);
         }
 
         panel currentPanel = getItem(position);

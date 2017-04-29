@@ -13,24 +13,29 @@ import tech.solarc.R;
 
 public class AppliancesAdapter extends RecyclerView.Adapter<AppliancesAdapter.ApplianceHolder>{
 
-    private Context context;
-    private ArrayList<panel> mList;
+    private Context mContext;
+    private ArrayList<Appliance> mList;
+
+    public AppliancesAdapter(Context context , ArrayList<Appliance> data){
+        mContext = context;
+        mList = data;
+    }
 
     @Override
     public ApplianceHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ApplianceHolder(LayoutInflater.from(context).inflate(R.layout.appliances_list_item,parent,false));
+        return new ApplianceHolder(LayoutInflater.from(mContext).inflate(R.layout.appliances_list_item,parent,false));
     }
 
     @Override
     public void onBindViewHolder(ApplianceHolder holder, int position) {
-        panel currentPanel = mList.get(position);
+        Appliance currentPanel = mList.get(position);
         holder.mName.setText(currentPanel.getName());
-
+        holder.mQuantity.setText(String.valueOf(currentPanel.getUsableQuantity()));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mList.size();
     }
 
     public class ApplianceHolder extends RecyclerView.ViewHolder{

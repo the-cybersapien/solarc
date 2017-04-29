@@ -68,27 +68,11 @@ public class DataUtils {
         return null;
     }
 
-
     public static ArrayList<Double> makeMonthsRequestUsingAddress(String address, double capacity) throws IOException, JSONException {
 
-        Uri.Builder uriBuilder = Uri.parse(BASE_URL_PV).buildUpon();
-        uriBuilder.appendQueryParameter("api_key", "DEMO_KEY")
-                .appendQueryParameter("address", address)
-                .appendQueryParameter("system_capacity", String.valueOf(capacity))
-                .appendQueryParameter("azimuth", getAzimuth(getLatitudeFromAddress(address)))
-                .appendQueryParameter("dataset", "intl")
-                .appendQueryParameter("radius", "0")
-                .appendQueryParameter("timeframe", "monthly")
-                .appendQueryParameter("tilt", "40")
-                .appendQueryParameter("array_type", "1")
-                .appendQueryParameter("module_type", "1")
-                .appendQueryParameter("losses", "10");
-
-        String response = Utils.makeHttpRequest(new URL(uriBuilder.build().toString()));
-        return monthsRads(response);
+        LatLang loc = getLatLangFromAddress(address);
+        return makeMonthsRequestUsingLatLang(loc.Latitude, loc.getLongitude(), capacity);
     }
-
-
 
     private static String getAzimuth(double lat){
         if (lat <= 0){
@@ -97,8 +81,7 @@ public class DataUtils {
         return "0";
     }
 
-    private static double getLatitudeFromAddress(String address) throws IOException, JSONException {
-        double d;
+    private static LatLang getLatLangFromAddress(String address) throws IOException, JSONException {
         try {
             address = URLEncoder.encode(address, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -106,17 +89,42 @@ public class DataUtils {
         }
         String url = "http://maps.google.com/maps/api/geocode/json?address=" + address;
         String response = Utils.makeHttpRequest(new URL(url));
-        return parseLatitude(response);
+        return parseLatLang(response);
     }
 
-    private static double parseLatitude(String jsonResponse) throws JSONException {
+    private static LatLang parseLatLang(String jsonResponse) throws JSONException {
         JSONObject root = new JSONObject(jsonResponse);
         JSONArray results = root.getJSONArray("results");
         if (results.length() < 0)
-            return 0;
+            return null;
         JSONObject geometry = results.getJSONObject(0).getJSONObject("geometry");
         JSONObject location = geometry.getJSONObject("location");
-        return location.getDouble("lat");
+        return new LatLang(location.getDouble("lat"), location.getDouble("lng"));
     }
 
+    public static class LatLang{
+        double Latitude;
+        double Longitude;
+
+        public LatLang(double latitude, double longitude) {
+            Latitude = latitude;
+            Longitude = longitude;
+        }
+
+        public double getLatitude() {
+            return Latitude;
+        }
+
+        public void setLatitude(double latitude) {
+            Latitude = latitude;
+        }
+
+        public double getLongitude() {
+            return Longitude;
+        }
+
+        public void setLongitude(double longitude) {
+            Longitude = longitude;
+        }
+    }
 }
