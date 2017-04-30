@@ -2,15 +2,14 @@ package tech.solarc.network;
 
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +43,7 @@ public class DataUtils {
         return monthly;
     }
 
-    public static ArrayList<Double> makeMonthsRequestUsingLatLang(double lat, double lang, double capacity){
+    public static ArrayList<Double> makeMonthRequest(double lat, double lang, double capacity){
 
         Uri.Builder uriBuilder = Uri.parse(BASE_URL_PV).buildUpon();
         uriBuilder.appendQueryParameter("api_key", "DEMO_KEY")
@@ -61,6 +60,7 @@ public class DataUtils {
                 .appendQueryParameter("losses", "10");
         try {
             String response = Utils.makeHttpRequest(new URL(uriBuilder.build().toString()));
+            Log.d(TAG, "makeMonthRequest: " + response);
             return monthsRads(response);
         } catch (IOException | JSONException e) {
             e.printStackTrace();

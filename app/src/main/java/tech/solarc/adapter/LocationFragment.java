@@ -24,8 +24,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import tech.solarc.R;
-import tech.solarc.network.DataUtils;
-import tech.solarc.network.DataUtils.*;
+import tech.solarc.network.DataUtils.LatLang;
 import tech.solarc.network.Utils;
 
 
