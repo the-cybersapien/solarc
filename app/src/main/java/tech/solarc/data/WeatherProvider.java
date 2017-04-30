@@ -67,7 +67,7 @@ public class WeatherProvider extends ContentProvider {
                         null, null, sortOrder);
                 break;
             case Weather_ID:
-                selection = WeatherEntry.COLUMN_NAME_DATE+ "=?";
+                selection = WeatherEntry.COLUMN_NAME_DATE+ ">=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
 
                 // This will perform a query on the pets table where the _id equals 3 to return a

@@ -26,7 +26,7 @@ public class Weather {
     public static final String WEATHER_MIST_DAY = "50d";
     public static final String WEATHER_MIST_NIGHT = "50n";
 
-    int date;
+    long date;
     String icon;
     double cloudCover;
 
@@ -37,11 +37,11 @@ public class Weather {
         this.cloudCover = cloudCover;
     }
 
-    public int getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

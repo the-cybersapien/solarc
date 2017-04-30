@@ -2,6 +2,8 @@ package tech.solarc;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import jp.wasabeef.recyclerview.animators.ScaleInLeftAnimator;
 import tech.solarc.adapter.Appliance;
 import tech.solarc.adapter.AppliancesAdapter;
+import tech.solarc.data.WeatherContract;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
         mView.setItemAnimator(new ScaleInLeftAnimator());
         ArrayList<Appliance> mList = new ArrayList<>();
 
-        mList.add(new Appliance("Fridge",1, 4.32));
-        mList.add(new Appliance("CFL",3, .21));
-        mList.add(new Appliance("Ceiling Fans",3, 1.5));
-        mList.add(new Appliance("TV",1, 0.55));
-        mList.add(new Appliance("Laptop",1, 0.36));
-        mList.add(new Appliance("Washing Machine",1, 0.13));
-        mList.add(new Appliance("Cell Phone",1, 0.01));
+        mList.add(new Appliance("Fridge",1, 4.32,4));
+        mList.add(new Appliance("CFL",3, .21,1));
+        mList.add(new Appliance("Ceiling Fans",3, 1.5,1));
+        mList.add(new Appliance("TV",1, 0.55,3));
+        mList.add(new Appliance("Laptop",1, 0.36,2));
+        mList.add(new Appliance("Washing Machine",1, 0.13,4));
+        mList.add(new Appliance("Cell Phone",1, 0.01,3));
 
         AppliancesAdapter mAdapter = new AppliancesAdapter(this,mList);
         mView.setAdapter(mAdapter);
@@ -118,6 +121,23 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    class CurrentWeatherTask extends AsyncTask<String, Void, Weather>{
+
+        @Override
+        protected Weather doInBackground(String... params) {
+            long time = System.currentTimeMillis();
+
+            Cursor cursor = getContentResolver().query(WeatherContract.WeatherEntry.CONTENT_URI, null, WeatherContract.WeatherEntry.COLUMN_NAME_DATE + "=?", new String[]{" ( SELECT MAX(" + WeatherContract.WeatherEntry.COLUMN_NAME_DATE + " ) FROM " + WeatherContract.WeatherEntry.TABLE_NAME + " WHERE " + WeatherContract.WeatherEntry.COLUMN_NAME_DATE + " <= " + String.valueOf(time) + " )"}, null);
+
+            int dt = cursor.getInt(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_NAME_DATE));
+            String icon = cursor.getString(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_NAME_ICON));
+            Double cloudCover = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_NAME_CLOUD));
+
+            return new Weather(dt, icon, cloudCover);
+        }
     }
 
 }
