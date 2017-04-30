@@ -8,8 +8,10 @@ public class Appliance implements Comparable<Appliance>{
     private int usableQuantity;
     private double dailyConsumption;
     private int priority;
+    private int mId;
 
-    public Appliance(String name , int quantity, double dailyConsumption, int priority){
+    public Appliance(int id, String name , int quantity, double dailyConsumption, int priority){
+        mId = id;
         mName = name;
         usableQuantity = quantity;
         this.dailyConsumption = dailyConsumption;
@@ -30,6 +32,10 @@ public class Appliance implements Comparable<Appliance>{
 
     public int getPriority(){
         return priority;
+    }
+
+    public int getId() {
+        return mId;
     }
 
     @Override
