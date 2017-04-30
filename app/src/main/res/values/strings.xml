@@ -7,4 +7,5 @@
     <string name="shared_prefs_file">tech.solarc.SHARED_PREF</string>
     <string name="prefs_name_lat">LATITUDE</string>
     <string name="prefs_name_lon">LONGITUDE</string>
+    <string name="number_picker_formatter">%02d</string>
 </resources>
