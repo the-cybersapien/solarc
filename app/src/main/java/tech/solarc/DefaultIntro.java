@@ -22,6 +22,7 @@ import tech.solarc.adapter.panelsFragment;
 
 /**
  * Created by NIKHIL on 30-04-2017.
+ * This Activity is displayed only on the first run of the app to take crucial user data.
  */
 
 public class DefaultIntro extends AppIntro implements LocationListener {
