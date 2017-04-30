@@ -13,5 +13,13 @@ The SolARC app is built for Android using Native Android Studio and Java Code, a
 The server side part, although tiny, is used to help a user make an informed decision when he is in the market for Solar Equipment. This Server runs on an instance of Amazon EC2 with Python (Flask).
 
 
+## App ScreenShots
 
+![alt selectingSolarPanel](https://github.com/skyerofficial/solarc/blob/master/img/1.png)
+
+![alt selectionLocation](https://github.com/skyerofficial/solarc/blob/master/img/2.png)
+
+![alt selectingAppliances](https://github.com/skyerofficial/solarc/blob/master/img/3.png)
+
+![alt mainScreen](https://github.com/skyerofficial/solarc/blob/master/img/4.png)
 
