@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
 
+import tech.solarc.adapter.AppliancesFragment;
 import tech.solarc.adapter.LocationFragment;
 import tech.solarc.adapter.panelsFragment;
 
@@ -49,6 +50,7 @@ public class DefaultIntro extends AppIntro implements LocationListener {
 
         addSlide(new panelsFragment());
         addSlide(new LocationFragment());
+        addSlide(new AppliancesFragment());
 
         setProgressButtonEnabled(false);
 
