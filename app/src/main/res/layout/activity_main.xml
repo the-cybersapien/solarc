@@ -8,36 +8,95 @@
     android:layout_height="match_parent"
     tools:context="tech.solarc.MainActivity">
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:textColor="#FFFFFF"
+    <ImageView
+        android:id="@+id/main_icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:src="@drawable/weather_clouds"
+        android:adjustViewBounds="true"/>
+
+
+    <TextView
+        android:id="@+id/weather"
+        android:layout_width="wrap_content"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:text="Sunny"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:padding="8dp"/>
 
-    <ImageView
-        android:id="@+id/weather_icon"
+    <TextView
+        android:id="@+id/power_stats"
+        android:text="Consumption : "
+        android:layout_marginLeft="20dp"
+        android:textColor="#FFFFFF"
+        android:padding="8dp"
+        android:layout_below="@id/weather"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:layout_toRightOf="@id/info"/>
+        android:id="@+id/power_data"
+        android:text="24KWH"
+        android:layout_toRightOf="@+id/power_stats"
+        android:layout_below="@id/weather"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"/>
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:id="@+id/savings_stats"
+        android:text="Approx Savings : "
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/power_stats"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/savings_data"
+        android:text="Rs 2560"
+        android:layout_toRightOf="@+id/power_stats"
+        android:layout_below="@id/power_data"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:textColor="#FFFFFF"/>
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycler_view"
-        android:layout_below="@id/info"
-        android:scrollbars="vertical">
-
-    </android.support.v7.widget.RecyclerView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
+        app:cardCornerRadius="5dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/card"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true"
         android:layout_height="wrap_content"
-        android:id="@+id/fab"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="30dp"/>
+        android:layout_below="@id/main_icon">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycler_view"
+                android:scrollbars="vertical">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
