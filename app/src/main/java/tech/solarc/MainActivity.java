@@ -72,13 +72,15 @@ public class MainActivity extends AppCompatActivity {
         mView.setLayoutManager(mManager);
         mView.setItemAnimator(new ScaleInLeftAnimator());
         ArrayList<Appliance> mList = new ArrayList<>();
-        mList.add(new Appliance("Fridge",1,24));
-        mList.add(new Appliance("CFL", 3 , 15));
-        mList.add(new Appliance("Ceiling Fans", 3 , 20));
-        mList.add(new Appliance("TV", 1 , 10));
-        mList.add(new Appliance("Laptop",1, 6));
-        mList.add(new Appliance("Washing Machine",1,0.25));
-        mList.add(new Appliance("Cell Phone",1,3));
+
+        mList.add(new Appliance("Fridge",1, 4.32));
+        mList.add(new Appliance("CFL",3, .21));
+        mList.add(new Appliance("Ceiling Fans",3, 1.5));
+        mList.add(new Appliance("TV",1, 0.55));
+        mList.add(new Appliance("Laptop",1, 0.36));
+        mList.add(new Appliance("Washing Machine",1, 0.13));
+        mList.add(new Appliance("Cell Phone",1, 0.01));
+
         AppliancesAdapter mAdapter = new AppliancesAdapter(this,mList);
         mView.setAdapter(mAdapter);
 //        button = (FloatingActionButton) findViewById(R.id.fab);
@@ -92,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
         card = (CardView) findViewById(R.id.card);
 
     }
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -119,4 +119,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

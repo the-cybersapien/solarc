@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
  * Created by cybersapien on 29/4/17.
@@ -23,27 +22,33 @@ public class DataUtils {
     private static final String BASE_URL_PV = "developer.nrel.gov/api/pvwatts/v5.json";
 
     /**
-     * Parse the JSON Response String and gets the Array of Monthly AC value
+     * Parse the JSON Response String and gets the AC power generation for a given month.
      * @param jsonResponse String containing the Response from server
+     * @param month month to get the data for (0-indexed).
      * @return ArrayList of Doubles from the JSON
      * @throws JSONException in case of bad JSON data
      */
     @Nullable
-    public static ArrayList<Double> monthsRads(String jsonResponse) throws JSONException {
+    public static Double monthsRads(String jsonResponse, int month) throws JSONException {
         JSONObject root = new JSONObject(jsonResponse);
         JSONArray errors = root.getJSONArray("errors");
         if (errors.length() != 0)
             return null;
         JSONObject outputs = root.getJSONObject("outputs");
         JSONArray ac_monthly = outputs.getJSONArray("ac_monthly");
-        ArrayList<Double> monthly = new ArrayList<>();
-        for (int i = 0; i < ac_monthly.length(); i++) {
-            monthly.add(ac_monthly.optDouble(i));
-        }
-        return monthly;
+        return ac_monthly.optDouble(month);
     }
 
-    public static ArrayList<Double> makeMonthRequest(double lat, double lang, double capacity){
+    /**
+     * This method creates the URI for request months data from NREL servers for the specific location
+     * It then returns the solar energy output for that location in that given month.
+     * @param lat Latitude of the location
+     * @param lang Longitude of the location
+     * @param capacity Capacity of the Solar Panels
+     * @param month Month to get the data for. (0 indexed)
+     * @return Approximate AC power generated for the given month.
+     */
+    public static double makeMonthRequest(double lat, double lang, double capacity, int month){
 
         Uri.Builder uriBuilder = Uri.parse(BASE_URL_PV).buildUpon();
         uriBuilder.appendQueryParameter("api_key", "DEMO_KEY")
@@ -61,11 +66,11 @@ public class DataUtils {
         try {
             String response = Utils.makeHttpRequest(new URL(uriBuilder.build().toString()));
             Log.d(TAG, "makeMonthRequest: " + response);
-            return monthsRads(response);
+            return monthsRads(response, month);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return 0;
     }
 
     private static String getAzimuth(double lat){
