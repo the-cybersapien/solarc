@@ -155,7 +155,7 @@ public class WeatherProvider extends ContentProvider {
         if (values.containsKey(WeatherEntry.COLUMN_NAME_ICON)) {
             String icon = values.getAsString(WeatherEntry.COLUMN_NAME_ICON);
             if (icon == null) {
-                throw new IllegalArgumentException("Weather requries icon url");
+                throw new IllegalArgumentException("Weather requires icon url");
             }
         }
 
