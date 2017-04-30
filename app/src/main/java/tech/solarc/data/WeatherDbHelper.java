@@ -13,8 +13,8 @@ import static tech.solarc.data.WeatherContract.*;
 public class WeatherDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "solarc.db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "solarc.db";
     private static final String CREATE_SQL_ENTRIES = "CREATE TABLE " +
             WeatherEntry.TABLE_NAME + " (" + WeatherEntry.COLUMN_NAME_DATE + " INTEGER NOT NULL," +
             WeatherEntry.COLUMN_NAME_ICON + " TEXT," + WeatherEntry.COLUMN_NAME_CLOUD + " REAL);";
