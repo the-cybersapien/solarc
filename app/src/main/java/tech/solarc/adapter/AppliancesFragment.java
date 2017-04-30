@@ -32,7 +32,6 @@ public class AppliancesFragment extends Fragment {
         NumberPicker picker = (NumberPicker) rootView.findViewById(R.id.number_picker);
         int value = picker.getValue();
 
-
         return rootView;
     }
 

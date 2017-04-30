@@ -7,10 +7,12 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mView;
     private RecyclerView.LayoutManager mManager;
     private FloatingActionButton button;
+    private CardView card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +81,15 @@ public class MainActivity extends AppCompatActivity {
         mList.add(new Appliance("Cell Phone",1,3));
         AppliancesAdapter mAdapter = new AppliancesAdapter(this,mList);
         mView.setAdapter(mAdapter);
-        button = (FloatingActionButton) findViewById(R.id.fab);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent editor = new Intent(MainActivity.this, EditorActivity.class);
-                startActivity(editor);
-            }
-        });
+//        button = (FloatingActionButton) findViewById(R.id.fab);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent editor = new Intent(MainActivity.this, EditorActivity.class);
+//                startActivity(editor);
+//            }
+//        });
+        card = (CardView) findViewById(R.id.card);
 
     }
 
@@ -96,4 +100,23 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MainActivity:","onRequestPermissionsResult");
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id)
+        {
+            case R.id.edit :
+                Intent editor = new Intent(MainActivity.this,EditorActivity.class);
+                startActivity(editor);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
