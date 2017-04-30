@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#2ecc71"
+    android:layout_height="match_parent"
+    android:paddingBottom="100dp"
+    tools:context="tech.solarc.adapter.LocationFragment">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/enter_location"
+            android:layout_width="match_parent"
+            android:textSize="32sp"
+            android:text="Enter Location"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:textColor="#FFFFFF"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/edit_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="15dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2ecc7155"
+            android:text="Search"
+            android:textSize="16dp"
+            android:id="@+id/location_find_button"
+            android:textColor="#FFF"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="OR"
+            android:gravity="center_horizontal"
+            android:textSize="32sp"
+            android:textColor="#FFF"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2ecc7155"
+            android:text="Give Location Permissions"
+            android:id="@+id/location_perm_button"
+            android:textColor="#FFF"
+            android:layout_margin="25dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

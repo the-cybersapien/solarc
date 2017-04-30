@@ -68,38 +68,11 @@ public class DataUtils {
         return null;
     }
 
-    public static ArrayList<Double> makeMonthsRequestUsingAddress(String address, double capacity) throws IOException, JSONException {
-
-        LatLang loc = getLatLangFromAddress(address);
-        return makeMonthsRequestUsingLatLang(loc.Latitude, loc.getLongitude(), capacity);
-    }
-
     private static String getAzimuth(double lat){
         if (lat <= 0){
             return "180";
         }
         return "0";
-    }
-
-    private static LatLang getLatLangFromAddress(String address) throws IOException, JSONException {
-        try {
-            address = URLEncoder.encode(address, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        String url = "http://maps.google.com/maps/api/geocode/json?address=" + address;
-        String response = Utils.makeHttpRequest(new URL(url));
-        return parseLatLang(response);
-    }
-
-    private static LatLang parseLatLang(String jsonResponse) throws JSONException {
-        JSONObject root = new JSONObject(jsonResponse);
-        JSONArray results = root.getJSONArray("results");
-        if (results.length() < 0)
-            return null;
-        JSONObject geometry = results.getJSONObject(0).getJSONObject("geometry");
-        JSONObject location = geometry.getJSONObject("location");
-        return new LatLang(location.getDouble("lat"), location.getDouble("lng"));
     }
 
     public static class LatLang{

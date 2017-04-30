@@ -28,7 +28,6 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
 
     private static final String TAG = "WeatherTask";
     private static final String OWM_API_KEY = "0250712c5d426eaaebac6b6aac31043b";
-    public static final String MY_SHARED_PREFS = "tech.solarc.SHARED_PREF";
 
     private final Context context;
 
@@ -39,7 +38,7 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
     @Override
     protected Void doInBackground(String... params) {
 
-        SharedPreferences sharedPreferences =  context.getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences =  context.getSharedPreferences(context.getString(R.string.shared_prefs_file), Context.MODE_PRIVATE);
         float latitude = sharedPreferences.getFloat(context.getString(R.string.prefs_name_lat), 0);
         float longitude = sharedPreferences.getFloat(context.getString(R.string.prefs_name_lon), 0);
         try {
