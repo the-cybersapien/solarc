@@ -6,4 +6,8 @@
         android:id="@+id/edit"
         app:showAsAction="never"/>
 
+    <item android:title="Refresh Weather"
+        android:id="@+id/refresh"
+        app:showAsAction="never" />
+
 </menu>

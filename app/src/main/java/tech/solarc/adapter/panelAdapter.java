@@ -33,7 +33,7 @@ public class panelAdapter extends ArrayAdapter<panel> {
         panel currentPanel = getItem(position);
 
         TextView view = (TextView) listItemView.findViewById(R.id.item_panel);
-        view.setText(currentPanel.getName());
+        view.setText(currentPanel.getModel());
 
         return listItemView;
     }

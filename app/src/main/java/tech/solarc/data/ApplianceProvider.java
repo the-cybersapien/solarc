@@ -20,7 +20,7 @@ import tech.solarc.adapter.Appliance;
 
 public class ApplianceProvider extends ContentProvider{
 
-    private ApplianceDbHelper applianceHelper;
+    private WeatherDbHelper applianceHelper;
 
     /** URI MATCHER CODE FOR CONTENT URI FOR THE APPLIANCE TABLE */
     public static final int APPLIANCE = 200;
@@ -40,7 +40,7 @@ public class ApplianceProvider extends ContentProvider{
 
     @Override
     public boolean onCreate() {
-        applianceHelper = new ApplianceDbHelper(getContext());
+        applianceHelper = new WeatherDbHelper(getContext());
         return true;
     }
 

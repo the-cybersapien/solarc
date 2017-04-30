@@ -36,11 +36,12 @@ public class panelsFragment extends Fragment implements ISlidePolicy{
         rootView = inflater.inflate(R.layout.fragment_panels, container, false);
 
         ArrayList<panel> list = new ArrayList<>();
-        list.add(new panel("Panel 1"));
-        list.add(new panel("Panel 1"));
-        list.add(new panel("Panel 1"));
-        list.add(new panel("Panel 1"));
-        list.add(new panel("Panel 1"));
+        list.add(new panel(3.3, 41.2, 3,"Panel 1",1));
+        list.add(new panel(3.3, 41.2, 3,"Panel 1",1));
+        list.add(new panel(3.3, 41.2, 3,"Panel 1",1));
+        list.add(new panel(3.3, 41.2, 3,"Panel 1",1));
+        list.add(new panel(3.3, 41.2, 3,"Panel 1",1));
+        list.add(new panel(3.3, 41.2, 3,"Panel 1",1));
 
         panelAdapter myadapter = new panelAdapter(rootView.getContext(),list);
         panelList = (ListView) rootView.findViewById(R.id.panel_list);

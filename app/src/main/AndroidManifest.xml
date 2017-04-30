@@ -25,6 +25,11 @@
             android:authorities="tech.solarc"
             android:exported="false" />
 
+        <provider
+            android:authorities="tech.solarc"
+            android:name=".data.ApplianceProvider"
+            android:exported="false"/>
+
         <activity android:name=".DefaultIntro" />
         <activity android:name=".EditorActivity" />
 

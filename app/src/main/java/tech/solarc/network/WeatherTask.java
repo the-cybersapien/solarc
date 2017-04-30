@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +26,7 @@ import tech.solarc.data.WeatherContract;
  * AsyncTask to Fetch Data from openWeatherMaps API.
  */
 
-public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
+public class WeatherTask extends AsyncTask<String, Void, Void>{
 
     private static final String TAG = "WeatherTask";
     private static final String OWM_API_KEY = "0250712c5d426eaaebac6b6aac31043b";
@@ -45,6 +47,8 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
             URL queryURL = buildURL(new DataUtils.LatLang(latitude, longitude));
             String jsonResponse = Utils.makeHttpRequest(queryURL);
             ArrayList<Weather> data = getWeatherDataFromJson(jsonResponse);
+
+            Log.d(TAG, "doInBackground: " + data.size());
             if (data.size() >= 1)
                 addToDb(data);
         } catch (IOException | JSONException e) {
@@ -62,10 +66,11 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
             values.put(WeatherContract.WeatherEntry.COLUMN_NAME_ICON, current.getIcon());
             values.put(WeatherContract.WeatherEntry.COLUMN_NAME_CLOUD, current.getCloudCover());
             values.put(WeatherContract.WeatherEntry.COLUMN_NAME_MAIN, current.getMain());
+            Log.d(TAG, "addToDb: " + values.toString());
             context.getContentResolver().insert(WeatherContract.WeatherEntry.CONTENT_URI, values);
         }
-        notifyAll();
         //TODO: ADD Code to delete old data from Database here
+
     }
 
     private URL buildURL(DataUtils.LatLang loc) throws MalformedURLException {

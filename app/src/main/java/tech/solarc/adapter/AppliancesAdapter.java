@@ -28,9 +28,9 @@ public class AppliancesAdapter extends RecyclerView.Adapter<AppliancesAdapter.Ap
 
     @Override
     public void onBindViewHolder(ApplianceHolder holder, int position) {
-        Appliance currentPanel = mList.get(position);
-        holder.mName.setText(currentPanel.getName());
-        holder.mQuantity.setText(String.valueOf(currentPanel.getUsableQuantity()));
+        Appliance currentAppliance = mList.get(position);
+        holder.mName.setText(currentAppliance.getName());
+        holder.mQuantity.setText(String.valueOf(currentAppliance.getUsableQuantity()));
     }
 
     @Override
