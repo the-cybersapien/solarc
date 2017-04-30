@@ -51,5 +51,6 @@ public final class WeatherContract {
         public static final String COLUMN_NAME_ICON = "icon";
         public static final String COLUMN_NAME_DATE = "date";
         public static final String COLUMN_NAME_CLOUD="cloud";
+        public static final String COLUMN_NAME_MAIN="main";
     }
 }

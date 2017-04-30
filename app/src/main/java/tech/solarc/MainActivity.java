@@ -15,6 +15,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     private FloatingActionButton button;
     private CardView card;
+
+    private Weather latestWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         AppliancesAdapter mAdapter = new AppliancesAdapter(this,mList);
         mView.setAdapter(mAdapter);
-//        button = (FloatingActionButton) findViewById(R.id.fab);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent editor = new Intent(MainActivity.this, EditorActivity.class);
-//                startActivity(editor);
-//            }
-//        });
         card = (CardView) findViewById(R.id.card);
 
     }
@@ -135,8 +131,19 @@ public class MainActivity extends AppCompatActivity {
             int dt = cursor.getInt(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_NAME_DATE));
             String icon = cursor.getString(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_NAME_ICON));
             Double cloudCover = cursor.getDouble(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_NAME_CLOUD));
+            String main = cursor.getString(cursor.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_NAME_MAIN));
 
-            return new Weather(dt, icon, cloudCover);
+            return new Weather(dt, icon, cloudCover, main);
+        }
+
+        @Override
+        protected void onPostExecute(Weather weather) {
+            latestWeather = weather;
+            ImageView weatherIcon = (ImageView)findViewById(R.id.main_icon);
+            weatherIcon.setImageResource(weather.getIconId());
+
+            TextView weatherView = (TextView) findViewById(R.id.weather);
+            weatherView.setText(weather.getMain());
         }
     }
 

@@ -12,7 +12,7 @@ public class Weather {
     public static final String WEATHER_FEW_CLOUDS_DAY = "02d";
     public static final String WEATHER_FEW_CLOUDS_NIGHT = "02n";
     public static final String WEATHER_SCATTERED_CLOUDS_DAY = "03d";
-    public static final String WEATHER_SCATTERED_CLOUDS_NIGHT = "03d";
+    public static final String WEATHER_SCATTERED_CLOUDS_NIGHT = "03n";
     public static final String WEATHER_BROKEN_CLOUDS_DAY = "04d";
     public static final String WEATHER_BROKEN_CLOUDS_NIGHT = "04n";
     public static final String WEATHER_SHOWER_RAIN_DAY = "09d";
@@ -26,15 +26,20 @@ public class Weather {
     public static final String WEATHER_MIST_DAY = "50d";
     public static final String WEATHER_MIST_NIGHT = "50n";
 
-    long date;
-    String icon;
-    double cloudCover;
+    private long date;
+    private String icon;
+    private double cloudCover;
+    private String main;
 
-
-    public Weather(int date, String icon, double cloudCover) {
+    public Weather(int date, String icon, double cloudCover, String main) {
         this.date = date;
         this.icon = icon;
         this.cloudCover = cloudCover;
+        this.main = main;
+    }
+
+    public String getMain() {
+        return main;
     }
 
     public long getDate() {
@@ -59,5 +64,42 @@ public class Weather {
 
     public void setCloudCover(double cloudCover) {
         this.cloudCover = cloudCover;
+    }
+
+    public int getIconId(){
+        switch (icon){
+            case WEATHER_CLEAR_DAY:
+                return R.drawable.weather_clear;
+            case WEATHER_CLEAR_NIGHT:
+                return R.drawable.weather_clear_night;
+            case WEATHER_FEW_CLOUDS_DAY:
+            case WEATHER_BROKEN_CLOUDS_DAY:
+            case WEATHER_SCATTERED_CLOUDS_DAY:
+                return R.drawable.weather_few_clouds;
+            case WEATHER_FEW_CLOUDS_NIGHT:
+            case WEATHER_SCATTERED_CLOUDS_NIGHT:
+            case WEATHER_BROKEN_CLOUDS_NIGHT:
+                return R.drawable.weather_few_clouds_night;
+            case WEATHER_SHOWER_RAIN_DAY:
+                return R.drawable.weather_showers_day;
+            case WEATHER_SHOWER_RAIN_NIGHT:
+                return R.drawable.weather_showers_night;
+            case WEATHER_RAIN_DAY:
+                return R.drawable.weather_rain_day;
+            case WEATHER_RAIN_NIGHT:
+                return R.drawable.weather_rain_night;
+            case WEATHER_THUNDERSTORM_DAY:
+                return R.drawable.weather_storm_day;
+            case WEATHER_THUNDERSTORM_NIGHT:
+                return R.drawable.weather_storm_night;
+            case WEATHER_SNOW_DAY:
+            case WEATHER_SNOW_NIGHT:
+                return R.drawable.weather_snow;
+            case WEATHER_MIST_DAY:
+            case WEATHER_MIST_NIGHT:
+                return R.drawable.weather_mist;
+            default:
+                return 0;
+        }
     }
 }

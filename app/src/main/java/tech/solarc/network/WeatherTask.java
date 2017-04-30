@@ -61,6 +61,7 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
             values.put(WeatherContract.WeatherEntry.COLUMN_NAME_DATE, current.getDate());
             values.put(WeatherContract.WeatherEntry.COLUMN_NAME_ICON, current.getIcon());
             values.put(WeatherContract.WeatherEntry.COLUMN_NAME_CLOUD, current.getCloudCover());
+            values.put(WeatherContract.WeatherEntry.COLUMN_NAME_MAIN, current.getMain());
             context.getContentResolver().insert(WeatherContract.WeatherEntry.CONTENT_URI, values);
         }
         notifyAll();
@@ -83,6 +84,7 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
         final String OWM_WEATHER_ICON = "icon";
         final String OWM_CLOUD = "clouds";
         final String OWM_CLOUDS_ALL = "all";
+        final String OWM_WEATHER_MAIN = "main";
 
         ArrayList<Weather> weatherList = new ArrayList<>();
 
@@ -93,9 +95,10 @@ public abstract class WeatherTask extends AsyncTask<String, Void, Void>{
             int date = currObject.getInt(OWM_EPOCH_DATE);
             JSONObject weather = currObject.getJSONArray(OWM_WEATHER).getJSONObject(0);
             String icon = weather.getString(OWM_WEATHER_ICON);
+            String main = weather.getString(OWM_WEATHER_MAIN);
             JSONObject clouds = currObject.getJSONObject(OWM_CLOUD);
             double cloudCover = clouds.getDouble(OWM_CLOUDS_ALL);
-            weatherList.add(new Weather(date, icon, cloudCover));
+            weatherList.add(new Weather(date, icon, cloudCover, main));
         }
 
         return weatherList;

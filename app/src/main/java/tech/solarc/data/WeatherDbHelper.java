@@ -17,7 +17,7 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "solarc.db";
     private static final String CREATE_SQL_ENTRIES = "CREATE TABLE " +
             WeatherEntry.TABLE_NAME + " (" + WeatherEntry.COLUMN_NAME_DATE + " INTEGER NOT NULL," +
-            WeatherEntry.COLUMN_NAME_ICON + " TEXT," + WeatherEntry.COLUMN_NAME_CLOUD + " REAL);";
+            WeatherEntry.COLUMN_NAME_ICON + " TEXT," + WeatherEntry.COLUMN_NAME_MAIN + " TEXT, "+ WeatherEntry.COLUMN_NAME_CLOUD + " REAL);";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + WeatherEntry.TABLE_NAME;
