@@ -17,7 +17,7 @@ import static tech.solarc.data.WeatherContract.*;
 public class WeatherProvider extends ContentProvider {
 
 
-    private WeatherDbHelper mDBHelper;
+    private SolArcDbHelper mDBHelper;
 
     /** URI matcher code for the content URI for the weathers table */
     private static final int Weather = 100;
@@ -41,7 +41,7 @@ public class WeatherProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
 
-        mDBHelper = new WeatherDbHelper(getContext());
+        mDBHelper = new SolArcDbHelper(getContext());
         return true;
     }
 

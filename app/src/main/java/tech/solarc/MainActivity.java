@@ -32,7 +32,7 @@ import tech.solarc.adapter.Appliance;
 import tech.solarc.adapter.AppliancesAdapter;
 import tech.solarc.data.ApplianceContract;
 import tech.solarc.data.WeatherContract;
-import tech.solarc.data.WeatherDbHelper;
+import tech.solarc.data.SolArcDbHelper;
 import tech.solarc.network.WeatherTask;
 
 public class MainActivity extends AppCompatActivity {
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         private SQLiteOpenHelper mDbHelper;
         @Override
         protected List<Appliance> doInBackground(Void... params) {
-            mDbHelper = new WeatherDbHelper(MainActivity.this);
+            mDbHelper = new SolArcDbHelper(MainActivity.this);
             SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
             // Define a projection that specifies which columns from the database

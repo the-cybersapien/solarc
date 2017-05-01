@@ -10,17 +10,13 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import javax.crypto.AEADBadTagException;
-
-import tech.solarc.adapter.Appliance;
-
 /**
  * Created by cybersapien on 30/4/17.
  */
 
 public class ApplianceProvider extends ContentProvider{
 
-    private WeatherDbHelper applianceHelper;
+    private SolArcDbHelper applianceHelper;
 
     /** URI MATCHER CODE FOR CONTENT URI FOR THE APPLIANCE TABLE */
     public static final int APPLIANCE = 200;
@@ -40,7 +36,7 @@ public class ApplianceProvider extends ContentProvider{
 
     @Override
     public boolean onCreate() {
-        applianceHelper = new WeatherDbHelper(getContext());
+        applianceHelper = new SolArcDbHelper(getContext());
         return true;
     }
 

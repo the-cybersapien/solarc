@@ -141,22 +141,26 @@ public class DefaultIntro extends AppIntro implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-
+        // Do nothing.
+        // Location required only once.
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        // Do nothing.
+        // Location required only once.
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
+        // Do nothing.
+        // Location required only once.
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        // Do nothing.
+        // Location required only once.
     }
 
     public void b()
