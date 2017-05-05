@@ -22,20 +22,40 @@ public class Appliance implements Comparable<Appliance>{
         return mName;
     }
 
+    public void setName(String mName) {
+        this.mName = mName;
+    }
+
     public int getUsableQuantity(){
         return usableQuantity;
+    }
+
+    public void setUsableQuantity(int usableQuantity) {
+        this.usableQuantity = usableQuantity;
     }
 
     public double getDailyConsumption() {
         return dailyConsumption;
     }
 
+    public void setDailyConsumption(double dailyConsumption) {
+        this.dailyConsumption = dailyConsumption;
+    }
+
     public int getPriority(){
         return priority;
     }
 
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
     public int getId() {
         return mId;
+    }
+
+    public void setId(int mId) {
+        this.mId = mId;
     }
 
     @Override
