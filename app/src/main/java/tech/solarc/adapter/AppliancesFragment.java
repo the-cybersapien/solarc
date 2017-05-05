@@ -29,7 +29,7 @@ public class AppliancesFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_appliances, container, false);
 
-        NumberPicker picker = (NumberPicker) rootView.findViewById(R.id.number_picker);
+        NumberPicker picker = (NumberPicker) rootView.findViewById(R.id.appliance_number_picker);
         int value = picker.getValue();
 
         return rootView;

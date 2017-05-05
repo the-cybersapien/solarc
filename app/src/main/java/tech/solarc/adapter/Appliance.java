@@ -6,6 +6,7 @@ public class Appliance implements Comparable<Appliance>{
 
     private String mName;
     private int usableQuantity;
+    private int totalQuantity;
     private double dailyConsumption;
     private int priority;
     private int mId;
@@ -13,7 +14,7 @@ public class Appliance implements Comparable<Appliance>{
     public Appliance(int id, String name , int quantity, double dailyConsumption, int priority){
         mId = id;
         mName = name;
-        usableQuantity = quantity;
+        totalQuantity = quantity;
         this.dailyConsumption = dailyConsumption;
         this.priority = priority;
     }
@@ -32,6 +33,14 @@ public class Appliance implements Comparable<Appliance>{
 
     public void setUsableQuantity(int usableQuantity) {
         this.usableQuantity = usableQuantity;
+    }
+
+    public int getTotalQuantity() {
+        return totalQuantity;
+    }
+
+    public void setTotalQuantity(int totalQuantity) {
+        this.totalQuantity = totalQuantity;
     }
 
     public double getDailyConsumption() {
